@@ -97,6 +97,7 @@ export const SubmitButton = styled(Button)`
   font-size: 2rem;
   margin-top: 4rem;
   margin-bottom: 6rem;
+  height: auto;
 `;
 
 export const ModalText = styled.div`

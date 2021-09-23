@@ -14,32 +14,43 @@ import { ToastContainer, toast } from "react-toastify";
 const HomePage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const handleClick = () => {
-    console.log("clicked");
     setIsOpen(true);
   };
 
   const sendInviteRequest = async (formData: FormDataType) => {
+    // 去除 confirm 这一个 field
+    const { confirm, ...payload } = formData;
     try {
-      await sendInvitation(formData);
+      setLoading(true)
+      await sendInvitation(payload);
       setIsOpen(false);
       setSuccessOpen(true);
     } catch (e) {
       toast.error(e as string, {
         position: "top-center",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleSubmit = (formData: FormDataType) => {
     sendInviteRequest(formData);
-    toast.info("An invitation request has been sent successfully", {
+    toast.info("An invitation request has been sent.", {
       position: "top-center",
+      hideProgressBar: true,
     });
   };
 
-  const handleOk = () => {
+  const handleCloseSuccessModal = () => {
     setSuccessOpen(false);
+  };
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
   };
 
   return (
@@ -55,8 +66,16 @@ const HomePage = () => {
       <CenterText>
         <InviteButton onClick={handleClick}>Request an invite</InviteButton>
       </CenterText>
-      <RequestModal isOpen={isOpen} onSubmit={handleSubmit}></RequestModal>
-      <SuccessModal isOpen={successOpen} onSubmit={handleOk}></SuccessModal>
+      <RequestModal
+        isOpen={isOpen}
+        onSubmit={handleSubmit}
+        onClose={handleCloseModal}
+        loading={loading}
+      ></RequestModal>
+      <SuccessModal
+        isOpen={successOpen}
+        onSubmit={handleCloseSuccessModal}
+      ></SuccessModal>
     </ContentWrapper>
   );
 };

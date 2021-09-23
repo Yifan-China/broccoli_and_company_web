@@ -14,7 +14,11 @@ type RequestModalProps = {
 Modal.setAppElement("#root");
 const SuccessModal = ({ isOpen, onSubmit }: RequestModalProps) => {
   return (
-    <Modal isOpen={isOpen} className="Modal" overlayClassName="Overlay">
+    <Modal
+      isOpen={isOpen}
+      className="Modal"
+      overlayClassName="Overlay"
+    >
       <ModalHeader>All done!</ModalHeader>
       <Divider></Divider>
       <ModalText>
