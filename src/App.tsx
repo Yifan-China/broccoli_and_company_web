@@ -2,6 +2,7 @@ import { Switch, Route } from "react-router-dom";
 import routes from "@/routes";
 import { Header, Main, Footer, CenterText } from "@/components/Styled";
 import "./App.css";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (

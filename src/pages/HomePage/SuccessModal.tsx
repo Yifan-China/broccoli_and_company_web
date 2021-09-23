@@ -8,10 +8,11 @@ import {
 
 type RequestModalProps = {
   isOpen: boolean;
+  onSubmit: () => void;
 };
 
 Modal.setAppElement("#root");
-const SuccessModal = ({ isOpen }: RequestModalProps) => {
+const SuccessModal = ({ isOpen, onSubmit }: RequestModalProps) => {
   return (
     <Modal isOpen={isOpen} className="Modal" overlayClassName="Overlay">
       <ModalHeader>All done!</ModalHeader>
@@ -20,7 +21,7 @@ const SuccessModal = ({ isOpen }: RequestModalProps) => {
         <div>You will be one of the first to experience</div>
         <div>Broccoli &amp; Co. when we launch.</div>
       </ModalText>
-      <SubmitButton>OK</SubmitButton>
+      <SubmitButton onClick={onSubmit}>OK</SubmitButton>
     </Modal>
   );
 };

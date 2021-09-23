@@ -3,7 +3,7 @@ import { ModalHeader, Divider, Form, FormItem, Input, SubmitButton } from "@/com
 
 type RequestModalProps = {
   isOpen: boolean;
-  onSubmit(): void;
+  onSubmit: (formData: FormDataType) => void;
 };
 
 Modal.setAppElement("#root");
@@ -12,14 +12,15 @@ const RequestModal = ({ isOpen, onSubmit }: RequestModalProps) => {
     <Modal isOpen={isOpen} className="Modal" overlayClassName="Overlay">
       <ModalHeader>Request an invite</ModalHeader>
       <Divider></Divider>
-      <Form
+      <Form 
         onFinish={(values) => {
-          console.log(values)
-          onSubmit();
+          // TODO: fix the type
+          const formData = values as FormDataType;
+          onSubmit(formData);
         }}
         wrapperCol={{ span: 24 }}
       >
-        <FormItem name="full_name">
+        <FormItem name="name">
           <Input placeholder="Full name"></Input>
         </FormItem>
         <FormItem name="email">
