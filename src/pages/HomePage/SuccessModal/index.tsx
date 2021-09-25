@@ -1,23 +1,31 @@
-import Modal from "react-modal";
+// import Modal from "react-modal";
+/* import {
+  ModalHeader,
+  Divider,
+  ModalText,
+  SubmitButton,
+} from "@/components/Styled"; */
 import {
   ModalHeader,
   Divider,
   ModalText,
   SubmitButton,
-} from "@/components/Styled";
+} from "../../../components/Styled";
+import {Modal} from 'antd';
 
 type RequestModalProps = {
   isOpen: boolean;
   onSubmit: () => void;
 };
 
-Modal.setAppElement("#root");
 const SuccessModal = ({ isOpen, onSubmit }: RequestModalProps) => {
   return (
     <Modal
-      isOpen={isOpen}
-      className="Modal"
-      overlayClassName="Overlay"
+      data-testid="success-modal"
+      visible={isOpen}
+      maskClosable={false}
+      closable={false}
+      footer={null}
     >
       <ModalHeader>All done!</ModalHeader>
       <Divider></Divider>

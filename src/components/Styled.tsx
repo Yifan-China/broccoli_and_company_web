@@ -51,7 +51,7 @@ export const SubTitle = styled.div`
   text-align: center;
 `;
 
-export const InviteButton = styled.button`
+export const RequestButton = styled.button`
   border-style: solid;
   padding: 1em;
   font-size: 2rem;

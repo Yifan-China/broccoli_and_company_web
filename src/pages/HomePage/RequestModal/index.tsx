@@ -1,6 +1,8 @@
-import Modal from "react-modal";
-import { ModalHeader, Divider, SubmitButton } from "@/components/Styled";
-import { Form, Input } from "antd";
+// import Modal from "react-modal";
+// import { ModalHeader, Divider, SubmitButton } from "@/components/Styled";
+import { ModalHeader, Divider, SubmitButton } from "../../../components/Styled";
+import { Form, Input, Modal } from "antd";
+import { CloseOutlined } from "@ant-design/icons";
 const FormItem = Form.Item;
 
 type RequestModalProps = {
@@ -10,19 +12,22 @@ type RequestModalProps = {
   loading: boolean;
 };
 
-Modal.setAppElement("#root");
+// Modal.setAppElement("#root");
 const RequestModal = ({ isOpen, onSubmit, onClose, loading }: RequestModalProps) => {
   return (
     <Modal
-      isOpen={isOpen}
-      onRequestClose={onClose}
-      shouldCloseOnOverlayClick={!loading}
-      className="Modal"
-      overlayClassName="Overlay"
+      data-testid="request-modal"
+      visible={isOpen}
+      onCancel={onClose}
+      maskClosable={false}
+      destroyOnClose={true}
+      closeIcon={<CloseOutlined data-testid="close-icon"/>}
+      footer={null}
     >
       <ModalHeader>Request an invite</ModalHeader>
       <Divider></Divider>
       <Form
+        data-testid="request-form"
         onFinish={(values) => {
           // TODO: fix the type
           const formData = values as FormDataType;
@@ -39,7 +44,7 @@ const RequestModal = ({ isOpen, onSubmit, onClose, loading }: RequestModalProps)
           rules={[
             {
               required: true,
-              message: "Please enter your full name!",
+              message: "Please enter your full name.",
             },
           ]}
           style={{
@@ -57,11 +62,11 @@ const RequestModal = ({ isOpen, onSubmit, onClose, loading }: RequestModalProps)
           rules={[
             {
               type: "email",
-              message: "The input is not valid E-mail!",
+              message: "The input is not valid E-mail.",
             },
             {
               required: true,
-              message: "Please enter your E-mail!",
+              message: "Please enter your E-mail.",
             },
           ]}
           style={{
@@ -80,7 +85,7 @@ const RequestModal = ({ isOpen, onSubmit, onClose, loading }: RequestModalProps)
           rules={[
             {
               required: true,
-              message: "Please confirm your E-mail address!",
+              message: "Please confirm your E-mail address.",
             },
             ({ getFieldValue }) => ({
               validator(_, value) {
@@ -89,7 +94,7 @@ const RequestModal = ({ isOpen, onSubmit, onClose, loading }: RequestModalProps)
                 }
                 return Promise.reject(
                   new Error(
-                    "The two E-mail addresses that you entered do not match!"
+                    "The two E-mail addresses that you entered do not match."
                   )
                 );
               },

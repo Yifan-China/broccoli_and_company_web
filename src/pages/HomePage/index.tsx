@@ -1,14 +1,25 @@
-import {
+/* import {
   Title,
   SubTitle,
   InviteButton,
   CenterText,
   ContentWrapper,
-} from "@/components/Styled";
+} from "@/components/Styled"; */
+
+import {
+  Title,
+  SubTitle,
+  RequestButton,
+  CenterText,
+  ContentWrapper,
+} from "../../components/Styled";
 import { useState } from "react";
-import RequestModal from "@/pages/HomePage/RequestModal";
-import SuccessModal from "@/pages/HomePage/SuccessModal";
-import { sendInvitation } from "@/services/invite";
+// import RequestModal from "@/pages/HomePage/RequestModal";
+import RequestModal from "./RequestModal";
+// import SuccessModal from "@/pages/HomePage/SuccessModal";
+import SuccessModal from "./SuccessModal";
+// import { sendInvitation } from "@/services/invite";
+import { sendInvitation } from "../../services/invite";
 import { ToastContainer, toast } from "react-toastify";
 
 const HomePage = () => {
@@ -24,7 +35,7 @@ const HomePage = () => {
     // 去除 confirm 这一个 field
     const { confirm, ...payload } = formData;
     try {
-      setLoading(true)
+      setLoading(true);
       await sendInvitation(payload);
       setIsOpen(false);
       setSuccessOpen(true);
@@ -64,7 +75,7 @@ const HomePage = () => {
         <div>Be the first to know when we launch.</div>
       </SubTitle>
       <CenterText>
-        <InviteButton onClick={handleClick}>Request an invite</InviteButton>
+        <RequestButton onClick={handleClick}>Request an invite</RequestButton>
       </CenterText>
       <RequestModal
         isOpen={isOpen}
