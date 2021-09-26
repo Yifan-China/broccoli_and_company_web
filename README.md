@@ -1,8 +1,8 @@
-# Getting Started with Create React App
+# Deployment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An demonstration of this application is deployed at [https://vigorous-hugle-97a87e.netlify.app/].
 
-## Available Scripts
+## Getting Started
 
 In the project directory, you can run:
 
