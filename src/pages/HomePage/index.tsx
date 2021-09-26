@@ -25,6 +25,7 @@ const HomePage = () => {
     // remove confirm email field
     const { confirm, ...payload } = formData;
     try {
+      setErrorMessage("");
       setLoading(true);
       await sendInvitation(payload);
       setRequestOpen(false);
@@ -50,6 +51,7 @@ const HomePage = () => {
 
   const handleCloseRequest = () => {
     setRequestOpen(false);
+    setErrorMessage("");
   };
 
   return (
