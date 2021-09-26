@@ -1,11 +1,3 @@
-/* import {
-  Title,
-  SubTitle,
-  InviteButton,
-  CenterText,
-  ContentWrapper,
-} from "@/components/Styled"; */
-
 import {
   Title,
   SubTitle,
@@ -14,35 +6,31 @@ import {
   ContentWrapper,
 } from "../../components/Styled";
 import { useState } from "react";
-// import RequestModal from "@/pages/HomePage/RequestModal";
 import RequestModal from "./RequestModal";
-// import SuccessModal from "@/pages/HomePage/SuccessModal";
 import SuccessModal from "./SuccessModal";
-// import { sendInvitation } from "@/services/invite";
 import { sendInvitation } from "../../services/invite";
 import { ToastContainer, toast } from "react-toastify";
 
 const HomePage = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [requestOpen, setRequestOpen] = useState(false);
   const [successOpen, setSuccessOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleClick = () => {
-    setIsOpen(true);
+    setRequestOpen(true);
   };
 
   const sendInviteRequest = async (formData: FormDataType) => {
-    // 去除 confirm 这一个 field
+    // remove confirm email field
     const { confirm, ...payload } = formData;
     try {
       setLoading(true);
       await sendInvitation(payload);
-      setIsOpen(false);
+      setRequestOpen(false);
       setSuccessOpen(true);
     } catch (e) {
-      toast.error(e as string, {
-        position: "top-center",
-      });
+      setErrorMessage(e as string);
     } finally {
       setLoading(false);
     }
@@ -56,16 +44,16 @@ const HomePage = () => {
     });
   };
 
-  const handleCloseSuccessModal = () => {
+  const handleCloseSuccess = () => {
     setSuccessOpen(false);
   };
 
-  const handleCloseModal = () => {
-    setIsOpen(false);
+  const handleCloseRequest = () => {
+    setRequestOpen(false);
   };
 
   return (
-    <ContentWrapper id="contentWrapper">
+    <ContentWrapper data-testid="homepage">
       <ToastContainer />
       <Title>
         <div>A better way</div>
@@ -78,14 +66,15 @@ const HomePage = () => {
         <RequestButton onClick={handleClick}>Request an invite</RequestButton>
       </CenterText>
       <RequestModal
-        isOpen={isOpen}
+        isOpen={requestOpen}
         onSubmit={handleSubmit}
-        onClose={handleCloseModal}
+        onClose={handleCloseRequest}
         loading={loading}
+        errorMessage={errorMessage}
       ></RequestModal>
       <SuccessModal
         isOpen={successOpen}
-        onSubmit={handleCloseSuccessModal}
+        onOk={handleCloseSuccess}
       ></SuccessModal>
     </ContentWrapper>
   );

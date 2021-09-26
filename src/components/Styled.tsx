@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Form as AntdForm, Input as AntdInput, Button } from "antd";
+import { Button } from "antd";
 
 export const Header = styled.header`
   height: 5rem;
@@ -12,9 +12,9 @@ export const Header = styled.header`
 `;
 
 export const Main = styled.main`
-  /* laptop 设置最小高度为 600px */ 
+  /* laptop 设置最小高度为 600px */
   height: max(calc(100vh - 14rem), 600px);
-  /* 在移动设备上不设置最小高度 */ 
+  /* 在移动设备上不设置最小高度 */
   @media (max-width: 1024px) {
     height: calc(100vh - 14rem);
   }
@@ -79,28 +79,17 @@ export const Divider = styled.hr`
   height: 2px;
 `;
 
-export const Form = styled(AntdForm)`
-  margin-top: 3rem;
-`;
-
-export const FormItem = styled(AntdForm.Item)`
-  margin-top: 2rem;
-`;
-
-export const Input = styled(AntdInput)`
-  width: 80%;
-  font-size: 2rem;
-`;
-
 export const SubmitButton = styled(Button)`
   width: 80%;
   font-size: 2rem;
   margin-top: 4rem;
-  margin-bottom: 6rem;
   height: auto;
 `;
 
 export const ModalText = styled.div`
   margin-top: 3rem;
-`
+`;
 
+export const ErrorMessage = styled.span`
+  color: red;
+`;

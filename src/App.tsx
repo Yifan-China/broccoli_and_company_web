@@ -1,7 +1,5 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-// import routes from "@/routes";
 import routes from "./routes";
-// import { Header, Main, Footer, CenterText } from "@/components/Styled";
 import { Header, Main, Footer, CenterText } from "./components/Styled";
 import "./App.css";
 import "antd/dist/antd.css";
@@ -15,8 +13,6 @@ function App() {
         <Main>
           <Switch>
             {routes.map((route, index) => (
-              // Render more <Route>s with the same paths as
-              // above, but different components this time.
               <Route
                 key={index}
                 path={route.path}

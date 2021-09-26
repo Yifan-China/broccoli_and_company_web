@@ -39,9 +39,8 @@ test("render the submit button", () => {
       loading={false}
     ></RequestModal>
   );
-  const modalHeader = component.getByRole("button", {
-    name: "Submit",
+  const sendButton = component.getByRole("button", {
+    name: "Send",
   });
-  expect(modalHeader).toBeInTheDocument();
+  expect(sendButton).toBeInTheDocument();
 });
-

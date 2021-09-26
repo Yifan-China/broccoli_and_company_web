@@ -1,19 +1,31 @@
-// import Modal from "react-modal";
-// import { ModalHeader, Divider, SubmitButton } from "@/components/Styled";
-import { ModalHeader, Divider, SubmitButton } from "../../../components/Styled";
+import {
+  ModalHeader,
+  Divider,
+  SubmitButton,
+  ErrorMessage,
+} from "../../../components/Styled";
 import { Form, Input, Modal } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 const FormItem = Form.Item;
+const FormItemStyle = {
+  marginTop: "2rem",
+};
 
 type RequestModalProps = {
   isOpen: boolean;
   onSubmit: (formData: FormDataType) => void;
   onClose: () => void;
   loading: boolean;
+  errorMessage: string;
 };
 
-// Modal.setAppElement("#root");
-const RequestModal = ({ isOpen, onSubmit, onClose, loading }: RequestModalProps) => {
+const RequestModal = ({
+  isOpen,
+  onSubmit,
+  onClose,
+  loading,
+  errorMessage,
+}: RequestModalProps) => {
   return (
     <Modal
       data-testid="request-modal"
@@ -21,15 +33,15 @@ const RequestModal = ({ isOpen, onSubmit, onClose, loading }: RequestModalProps)
       onCancel={onClose}
       maskClosable={false}
       destroyOnClose={true}
-      closeIcon={<CloseOutlined data-testid="close-icon"/>}
+      closeIcon={<CloseOutlined data-testid="close-icon" />}
       footer={null}
+      style={{ textAlign: "center" }}
     >
       <ModalHeader>Request an invite</ModalHeader>
       <Divider></Divider>
       <Form
         data-testid="request-form"
         onFinish={(values) => {
-          // TODO: fix the type
           const formData = values as FormDataType;
           onSubmit(formData);
         }}
@@ -47,9 +59,7 @@ const RequestModal = ({ isOpen, onSubmit, onClose, loading }: RequestModalProps)
               message: "Please enter your full name.",
             },
           ]}
-          style={{
-            marginTop: "2rem",
-          }}
+          style={FormItemStyle}
         >
           <Input
             placeholder="Full name"
@@ -69,9 +79,7 @@ const RequestModal = ({ isOpen, onSubmit, onClose, loading }: RequestModalProps)
               message: "Please enter your E-mail.",
             },
           ]}
-          style={{
-            marginTop: "2rem",
-          }}
+          style={FormItemStyle}
         >
           <Input
             placeholder="Email"
@@ -100,9 +108,7 @@ const RequestModal = ({ isOpen, onSubmit, onClose, loading }: RequestModalProps)
               },
             }),
           ]}
-          style={{
-            marginTop: "2rem",
-          }}
+          style={FormItemStyle}
         >
           <Input
             placeholder="Confirm email"
@@ -111,12 +117,15 @@ const RequestModal = ({ isOpen, onSubmit, onClose, loading }: RequestModalProps)
         </FormItem>
         <FormItem>
           <SubmitButton
-            type="primary"
             htmlType="submit"
             loading={loading}
+            disabled={loading}
           >
-            Submit
+            {loading ? "Sending, please wait." : "Send"}
           </SubmitButton>
+        </FormItem>
+        <FormItem>
+          <ErrorMessage>{errorMessage}</ErrorMessage>
         </FormItem>
       </Form>
     </Modal>
